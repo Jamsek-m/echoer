@@ -36,7 +36,7 @@ pipeline {
                 }
             }
         }
-        /* stage("Publishing docker image") {
+        stage("Publishing docker image") {
             steps {
                 script {
                     docker.withRegistry(registry, registryCredential) {
@@ -51,6 +51,6 @@ pipeline {
                 sh "docker rmi $dockerImageTag:$version"
                 sh "docker rmi $dockerImageTag:latest"
             }
-        }*/
+        }
     }
 }

@@ -1,0 +1,17 @@
+{
+  "name": "echoer",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "version": "node version.js",
+    "lint": "eslint --fix ."
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "express": "~4.16.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.0"
+  }
+}

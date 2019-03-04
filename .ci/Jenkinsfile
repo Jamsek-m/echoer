@@ -1,0 +1,56 @@
+pipeline {
+    environment {
+        registry = "https://docker.mjamsek.com"
+        registryCredential = "mjamsek-hub"
+        dockerImageTag = "docker.mjamsek.com/echoer"
+        dockerImage = ""
+        version = ""
+    }
+
+    agent any
+
+    tools {
+        nodejs "node11.6"
+    }
+
+    stages {
+        stage("Cloning git") {
+            steps {
+                git branch: "master",
+                        credentialsId: "github-token",
+                        url: "https://github.com/Jamsek-m/echoer.git"
+            }
+        }
+        stage("Set environment variables") {
+            steps {
+                script {
+                    sh "node version.js > VERSION"
+                    version = readFile('VERSION').trim()
+                }
+            }
+        }
+        stage("Building docker image") {
+            steps {
+                script {
+                    dockerImage = docker.build dockerImageTag
+                }
+            }
+        }
+        /* stage("Publishing docker image") {
+            steps {
+                script {
+                    docker.withRegistry(registry, registryCredential) {
+                        dockerImage.push("$version")
+                        dockerImage.push("latest")
+                    }
+                }
+            }
+        }
+        stage("Removing generated docker images") {
+            steps {
+                sh "docker rmi $dockerImageTag:$version"
+                sh "docker rmi $dockerImageTag:latest"
+            }
+        }*/
+    }
+}

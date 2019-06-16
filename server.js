@@ -8,25 +8,7 @@ server.use(cookieParser());
 server.disable("x-powered-by");
 
 server.post("/echo", (req, res) => {
-    const request = {
-        baseUrl: req.baseUrl,
-        body: req.body,
-        cookies: req.cookies,
-        headers: req.headers,
-        hostname: req.hostname,
-        ip: req.ip,
-        params: req.params,
-        path: req.path,
-        protocol: req.protocol,
-        query: req.query,
-        route: {
-            path: req.route.path,
-            methods: req.route.methods
-        },
-        secure: req.secure,
-        subdomains: req.subdomains
-    };
-    console.log(request);
+    console.log(req);
     console.log("------------------------------");
     res.status(200).json({
         status: 200,
@@ -35,6 +17,7 @@ server.post("/echo", (req, res) => {
 });
 
 server.use((req, res, next) => {
+    console.log("server using 404");
     next(new Error(404));
 });
 

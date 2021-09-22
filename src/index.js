@@ -20,11 +20,23 @@ server.use(cookieParser());
 server.use(cors());
 
 /**
+ * @param payload {EchoResponse}
+ */
+function logPayload(payload) {
+    const stringifiedPayload = JSON.stringify(payload);
+    const timestamp = new Date();
+    console.log("========== Request ==========");
+    console.log(timestamp.toISOString());
+    console.log(stringifiedPayload);
+}
+
+/**
  * @param req {Request}
  * @param res {Response}
  */
 function processEcho(req, res) {
     const payload = handler(req);
+    logPayload(payload);
     res.status(200);
     res.json(payload);
 }

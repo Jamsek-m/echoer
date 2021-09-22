@@ -2,7 +2,7 @@ FROM node:alpine
 
 # Install dependencies in separate layer
 ADD package.json /tmp/package.json
-ADD package-lock.json /tmp/package-lock.json
+# ADD package-lock.json /tmp/package-lock.json
 RUN cd /tmp && npm install
 
 RUN mkdir /app
@@ -12,11 +12,12 @@ WORKDIR /app
 # Move installed dependencies to app directory
 RUN cp -a /tmp/node_modules /app
 # Copy executables to app directory
-ADD . /app
+ADD src/* /app
+ADD package.json /app
 
 ENV PORT=3000
 ENV NODE_ENV=production
 
 EXPOSE 3000
 
-CMD ["node", "src/index.js"]
+CMD ["node", "index.js"]

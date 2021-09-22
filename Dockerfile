@@ -12,7 +12,7 @@ WORKDIR /app
 # Move installed dependencies to app directory
 RUN cp -a /tmp/node_modules /app
 # Copy executables to app directory
-ADD src/* /app
+ADD src/ /app
 ADD package.json /app
 
 ENV PORT=3000

@@ -1,0 +1,97 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Echoer",
+        "version": "1.1.0",
+        "description": "Echoer service for echoing request back to caller.",
+        "contact": {
+            "name": "Miha Jamsek",
+            "url": "https://github.com/Jamsek-m"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Local development environment"
+        },
+        {
+            "url": "https://echo.mjamsek.com",
+            "description": "Production environment"
+        }
+    ],
+    "paths": {
+        "/echo": {
+            "get": {
+                "tags": [
+                    "echo"
+                ],
+                "summary": "Echo GET endpoint",
+                "operationId": "echoGet",
+                "responses": {
+                    "200": {
+                        "description": "Echo back",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EchoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "echo"
+                ],
+                "summary": "Echo POST endpoint",
+                "operationId": "echoPost",
+                "requestBody": {
+                    "description": "Optional body",
+                    "content": {
+
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Echo back",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EchoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "EchoResponse": {
+                "type": "object",
+                "properties": {
+                    "queryParameters": {
+                        "$ref": "#/components/schemas/StringMap"
+                    },
+                    "headers": {
+                        "$ref": "#/components/schemas/StringMap"
+                    },
+                    "cookies": {
+                        "$ref": "#/components/schemas/StringMap"
+                    },
+                    "body": {
+                        "type": "string"
+                    }
+                }
+            },
+            "StringMap": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

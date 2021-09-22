@@ -2,7 +2,7 @@ pipeline {
     environment {
         registry = "https://docker.mjamsek.com"
         registryCredential = "nexus-username"
-        dockerImageTag = "docker.mjamsek.com/authz-server"
+        dockerImageTag = "docker.mjamsek.com/echoer"
         dockerImage = ""
 
         COMMIT_AUTHOR = ""
